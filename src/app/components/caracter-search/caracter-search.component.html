@@ -1,0 +1,65 @@
+<h1>Búscador de personajes</h1>
+<!--
+<form>
+  <input type="text" name="query" [(ngModel)]="query" />
+  <input type="submit" value="Buscar" (click)="search()" />
+  <!-- <input type="submit" value="{{labelButton}}" (click)="search()"/> 
+  <p>Parámetro de búsqueda: {{ query }}</p>
+  <p>Resultado: {{ result }}</p>
+</form>-->
+<label *ngIf="messageNoResults !== ''" class="error">{{
+  messageNoResults
+}}</label>
+<label *ngIf="name.invalid && (name.dirty || name.touched)" class="error"
+    >!Debe añadir un nombre¡</label
+  >
+<br>
+<form #searchChar="ngForm" >
+  
+  
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label for="name">Nombre:</mat-label>
+    <input
+    type="text"
+    required
+    name="name"
+    [(ngModel)]="charname"
+    #name="ngModel"
+    matInput
+  />
+  </mat-form-field>
+  
+  <button type="submit" value="buscar" mat-raised-button color="primary" (click)="onSubmit(searchChar)" > enviar</button>
+  
+  
+  
+
+ 
+</form>
+<!-- ID:-->
+<form>
+  <label  mat-label *ngIf="errorId!=''" class="error">{{errorId}}</label><br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Id:</mat-label>
+    <input type="text" name="name"
+  [(ngModel)]="idChar" #idInput="ngModel" placeholder="1" matInput>
+  </mat-form-field>
+  
+  
+  <button (click)="searchGetById(idInput)" mat-raised-button color="primary">buscar Id</button>
+</form>
+
+<!-- Info-->
+<ul>
+  <mat-card *ngFor="let character of charactersSearch" >
+    <span routerLink="/detail/{{ character.id }}">
+      <mat-card-content>
+        <div class="cardname">
+          <mat-card-title>{{ character.name }}</mat-card-title>
+        </div>
+        <figure><img mat-card-image [src]="character.image" /></figure>
+      </mat-card-content>
+    </span>
+  </mat-card>
+</ul>
+
